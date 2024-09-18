@@ -1,29 +1,27 @@
 import express from 'express';
-import 'dotenv/config'; // Permite trabajar con variables de entorno
-import cors from 'cors'; // Importa cors
+import 'dotenv/config';
+import cors from 'cors';
 import dbConnection from '../database/config.js';
 import routesClient from '../routes/routesClient.js';
 import routesUser from '../routes/routesUser.js';
 import routesAccount from '../routes/routesSavingAccount.js';
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 export default class Server {
     constructor() {
         this.app = express();
-        this.listen();
-        this.dbConnection();
-        this.pathClient = '/api/cliente';
-        this.pathUser = '/api/usuario';
-        this.pathAccount = '/api/cuenta';
-        // Configurar CORS antes de las rutas
         this.middlewares();
         this.route();
+        this.dbConnection();
+        this.listen();
     }
 
     middlewares() {
-        // Configurar CORS con opciones
         this.app.use(cors());
-
-        // Permitir que el servidor procese JSON
         this.app.use(express.json());
     }
 
@@ -34,17 +32,21 @@ export default class Server {
     }
 
     async dbConnection() {
-        await dbConnection();
+        try {
+            await dbConnection();
+            console.log('Conexión a la base de datos exitosa');
+        } catch (error) {
+            console.error('Error al conectar a la base de datos:', error);
+        }
     }
 
     route() {
-        // Rutas
-        app.use(express.static('public'));
+        this.app.use(express.static('public'));
         this.app.get('/', (req, res) => {
-            res.sendFile(__dirname + '/public/index.html')
+            res.sendFile(__dirname + '/public/index.html');
         });
-        this.app.use(this.pathClient, routesClient);
-        this.app.use(this.pathUser, routesUser);
-        this.app.use(this.pathAccount, routesAccount);
+        this.app.use('/api/cliente', routesClient);
+        this.app.use('/api/usuario', routesUser);
+        this.app.use('/api/cuenta', routesAccount);
     }
 }
