@@ -39,6 +39,10 @@ export default class Server {
 
     route() {
         // Rutas
+        app.use(express.static('public'));
+        this.app.get('/', (req, res) => {
+            res.sendFile(__dirname + '/public/index.html')
+        });
         this.app.use(this.pathClient, routesClient);
         this.app.use(this.pathUser, routesUser);
         this.app.use(this.pathAccount, routesAccount);
