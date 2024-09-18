@@ -14,7 +14,6 @@ export default class Server {
         this.pathClient = '/api/cliente';
         this.pathUser = '/api/usuario';
         this.pathAccount = '/api/cuenta';
-
         // Configurar CORS antes de las rutas
         this.middlewares();
         this.route();
@@ -22,11 +21,7 @@ export default class Server {
 
     middlewares() {
         // Configurar CORS con opciones
-        this.app.use(cors({
-            origin: '*', // Permitir solicitudes desde cualquier origen
-            methods: ['GET', 'POST', 'PUT', 'DELETE'], // Métodos permitidos
-            allowedHeaders: ['Content-Type', 'Authorization'], // Encabezados permitidos
-        }));
+        this.app.use(cors());
 
         // Permitir que el servidor procese JSON
         this.app.use(express.json());
