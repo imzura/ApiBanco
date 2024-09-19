@@ -1,4 +1,4 @@
-import Counter from '../counter/CounterModel.js';
+import Counter from '../counter/counterModel.js';
 
 export async function getNextSequenceValue(sequenceName) {
     const sequenceDocument = await Counter.findOneAndUpdate(
