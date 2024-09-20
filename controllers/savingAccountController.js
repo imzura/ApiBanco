@@ -49,7 +49,7 @@ export async function consignMoney(req, res) {
             return res.status(400).json('El monto a consignar debe ser positivo');
         }
 
-        account.balance += amount;
+        account.balance += parseFloat(amount);
         await account.save();
         res.status(200).json('Dinero consignado con éxito');
     } catch (error) {
