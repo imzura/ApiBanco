@@ -1,4 +1,5 @@
 import SavingAccount from "../models/savingAccount.js";
+import Client from "../models/client.js";
 import bcrypt from 'bcryptjs'
 
 export async function getAcounts(req, res) {
@@ -19,14 +20,34 @@ export async function listAccount(req, res) {
 }
 
 export async function createAccount(req, res) {
-    const body = req.body
+    const { clientDocument, accessKey, balance } = req.body;
+    
     try {
-        const account = new SavingAccount(body);
-        account.accessKey = await bcrypt.hash(body.accessKey, 10)
+        // Verificar si el cliente existe
+        const client = await Client.findOne({ document: clientDocument });
+        if (!client) {
+            return res.status(400).json('El cliente no existe');
+        }
+        
+        // Verificar si ya existe una cuenta con el mismo documento del cliente
+        const existingAccount = await SavingAccount.findOne({ clientDocument });
+        if (existingAccount) {
+            return res.status(400).json('Ya existe una cuenta para este cliente');
+        }
+        
+        // Crear la nueva cuenta
+        const hashedAccessKey = await bcrypt.hash(accessKey, 10);
+        const account = new SavingAccount({
+            clientDocument, 
+            accessKey: hashedAccessKey,
+            balance
+        });
+
         await account.save();
-        res.status(201).json('Cuenta creada exitósamente')
+        res.status(201).json('Cuenta creada exitósamente');
     } catch (error) {
-        res.status(500).json('Error al crear una cuenta')
+        console.error(error);
+        res.status(500).json('Error al crear una cuenta', error);
     }
 }
 

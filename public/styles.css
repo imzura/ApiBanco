@@ -1,194 +1,72 @@
-/* styles.css */
-
-/* Fuente y Reset Global */
 body {
     font-family: 'Poppins', sans-serif;
-    background-color: #f8f9fa;
-    color: #333;
-    margin: 0;
-    padding: 0;
-}
-
-/* Contenedor Principal */
-.container {
-    width: 90%;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 20px;
-    box-sizing: border-box;
-}
-
-/* Header */
-.header {
-    background-color: #007bff;
-    color: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    text-align: center;
-}
-
-.header h1 {
-    font-size: 2.5em;
-    margin: 0;
-    font-weight: 600;
-}
-
-.header i {
-    margin-right: 8px;
-    font-size: 1.2em;
-}
-
-.welcome-message {
-    font-size: 1.2em;
-    margin-top: 10px;
-    line-height: 1.4;
-    color: #e0e0e0;
-}
-
-/* Main Content */
-.main {
-    text-align: center;
-    margin: 20px 0;
-}
-
-.info {
-    margin-top: 20px;
-}
-
-.info h2 {
-    color: #004085;
-    font-size: 2em;
-    margin: 20px 0;
-    font-weight: 600;
-}
-
-.info i {
-    margin-right: 8px;
-}
-
-.info p {
-    font-size: 1.1em;
-    margin: 10px 0;
-}
-
-.button-container {
+    background: linear-gradient(135deg, #8dfaf4, #f898b7);
+    color: #333; /* Texto en un tono oscuro para mayor contraste */
+    height: 100vh;
     display: flex;
-    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.navbar {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+.navbar-brand {
+    color: #333; /* Texto oscuro en el navbar */
+    font-weight: 600;
+}
+
+.navbar-nav .nav-link {
+    color: #333; /* Texto oscuro para los enlaces del navbar */
+}
+.navbar-nav .nav-link:hover {
+    color: #555; /* Un poco más claro al hacer hover */
+}
+.header {
+    display: flex;
+    flex-direction: column;
     justify-content: center;
-    gap: 10px;
-    margin: 20px 0;
+    align-items: center;
+    text-align: center;
+    height: 80vh;
 }
-
-.cta-button {
-    display: inline-block;
-    padding: 12px 24px;
-    font-size: 1.2em;
-    color: #fff;
-    background-color: #007bff;
+.header h1 {
+    font-size: 4rem;
+    font-weight: 600;
+    color: #333; /* Color oscuro para que destaque sobre el fondo claro */
+}
+.welcome-message {
+    font-size: 1.5rem;
+    margin-top: 20px;
+    color: #555; /* Texto ligeramente más claro para complementar */
+}
+.cta-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 40px;
+}
+.cta-buttons a {
+    padding: 15px 30px;
     border-radius: 8px;
-    text-decoration: none;
-    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.cta-button i {
-    margin-right: 8px;
-}
-
-.cta-button:hover {
-    background-color: #0056b3;
-    transform: translateY(-2px);
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
-}
-
-.doc-link {
-    color: #007bff;
+    font-size: 1.1rem;
+    color: #333; /* Texto oscuro para mayor legibilidad */
+    background-color: rgba(255, 255, 255, 0.7);
+    transition: all 0.3s ease;
     text-decoration: none;
 }
-
-.doc-link i {
-    margin-right: 8px;
+.cta-buttons a:hover {
+    background-color: rgba(255, 255, 255, 0.9);
 }
-
-.doc-link:hover {
-    text-decoration: underline;
-}
-
-/* Footer */
 .footer {
     text-align: center;
-    padding: 10px 0;
-    border-top: 1px solid #ddd;
-    margin-top: 20px;
-    font-size: 0.9em;
+    padding: 20px 0;
+    background-color: rgba(255, 255, 255, 0.1);
+    color: #333; /* Texto oscuro para el footer */
 }
-
-/* Responsividad */
-@media (max-width: 1200px) {
-    .header h1 {
-        font-size: 2.2em;
-    }
-
-    .welcome-message {
-        font-size: 1.1em;
-    }
-
-    .info h2 {
-        font-size: 1.8em;
-    }
-
-    .info p {
-        font-size: 1em;
-    }
-
-    .cta-button {
-        font-size: 1.1em;
-    }
+.footer p {
+    margin: 0;
 }
-
-@media (max-width: 992px) {
-    .header h1 {
-        font-size: 2em;
-    }
-
-    .welcome-message {
-        font-size: 1em;
-    }
-
-    .info h2 {
-        font-size: 1.7em;
-    }
-
-    .info p {
-        font-size: 0.9em;
-    }
-
-    .cta-button {
-        font-size: 1em;
-        padding: 10px 20px;
-    }
-}
-
-@media (max-width: 768px) {
-    .cta-button {
-        width: 100%;
-        font-size: 0.9em;
-        padding: 10px;
-    }
-
-    .info p {
-        font-size: 0.9em;
-    }
-}
-
-@media (max-width: 576px) {
-    .button-container {
-        flex-direction: column;
-    }
-
-    .cta-button {
-        width: 100%;
-        text-align: center;
-    }
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
 }

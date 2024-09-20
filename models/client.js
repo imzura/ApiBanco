@@ -15,7 +15,7 @@ const ClientSchema = new Schema({
         unique: true,
         maxLength: [10, 'Máximo 10 números']
     },
-    dateBirth: {
+    birthDate: {
         type: Date
     }
 })

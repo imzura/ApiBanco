@@ -1,31 +1,34 @@
 import { model, Schema } from "mongoose";
-
-let numeroCuentaAutoIncrement = 1;
+import { getNextSequenceValue } from "../counter/counterService.js";
 
 const SavingAccountSchema = new Schema({
-    numberAccount: {
-        type: Number,
-        unique: true,
-        required: true,
-        default: () => numeroCuentaAutoIncrement++ 
-    },
     clientDocument: { 
-        type: String, 
-        unique: true,
+        type: Number,
         required: true 
     },
-    openingDate: { 
-        type: Date, 
-        default: Date.now 
+    numberAccount: {
+        type: Number,
+        unique: true
     },
-    balance: { 
-        type: Number, 
-        default: 0 
+    openingDate: {
+        type: Date,
+        default: Date.now
     },
-    accessKey: { 
-        type: String, 
-        required: true,
+    balance: {
+        type: Number,
+        default: 0
+    },
+    accessKey: {
+        type: String,
     }
 });
+
+// Pre-save hook para auto-incrementar numeroCuenta
+SavingAccountSchema.pre('save', async function (next) {
+    if (this.isNew) {
+      this.numberAccount = await getNextSequenceValue('numberAccount');
+    }
+    next();
+  });
 
 export default model('SavingAccount', SavingAccountSchema, 'savingAccount');
