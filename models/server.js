@@ -21,7 +21,12 @@ export default class Server {
     }
 
     middlewares() {
-        this.app.use(cors());
+        // Configuración específica de CORS
+        const corsOptions = {
+            origin: 'http://localhost:5173', // Origen permitido
+            optionsSuccessStatus: 200 // Para asegurar compatibilidad con algunos navegadores
+        };
+        this.app.use(cors(corsOptions)); // Aplicar CORS con las opciones configuradas
         this.app.use(express.json());
     }
 
