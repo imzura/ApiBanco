@@ -23,7 +23,7 @@ export default class Server {
     middlewares() {
         // Configuración específica de CORS
         const corsOptions = {
-            origin: 'http://localhost:5173', // Origen permitido
+            origin: 'http://localhost:5174', // Origen permitido
             optionsSuccessStatus: 200 // Para asegurar compatibilidad con algunos navegadores
         };
         this.app.use(cors(corsOptions)); // Aplicar CORS con las opciones configuradas
